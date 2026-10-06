@@ -803,6 +803,158 @@
       transform: scale(1.04);
     }
 
+    /* HUSBAND COUPONS BOOKLET */
+    .coupons-container {
+      margin: 30px auto;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .coupons-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--deep-crimson);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .coupons-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    .coupons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .coupon-card {
+      background: #ffffff;
+      border: 2px dashed #ff6b8b;
+      border-radius: 18px;
+      padding: 16px 14px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(255, 107, 139, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .coupon-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(255, 107, 139, 0.22);
+    }
+
+    .coupon-icon {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+    }
+
+    .coupon-name {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .coupon-claim-btn {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .coupon-claim-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .coupon-claim-btn.claimed {
+      background: #74b9ff;
+      box-shadow: none;
+    }
+
+    /* WISH MESSAGE BOX */
+    .wish-box-container {
+      margin: 30px auto 10px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--soft-pink);
+      border-radius: 22px;
+      padding: 22px 18px;
+      max-width: 540px;
+      box-shadow: 0 8px 25px rgba(255, 107, 139, 0.15);
+      text-align: center;
+    }
+
+    .wish-box-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--deep-crimson);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .wish-box-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .wish-textarea {
+      width: 100%;
+      height: 90px;
+      padding: 12px;
+      border: 2px solid #ffd2dc;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      resize: none;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .wish-textarea:focus {
+      border-color: var(--primary-pink);
+    }
+
+    .send-wish-btn {
+      margin-top: 12px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border: none;
+      padding: 11px 26px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+      transition: transform 0.25s ease;
+    }
+
+    .send-wish-btn:hover {
+      transform: scale(1.04);
+    }
+
     /* Action Toolbar */
     .reveal-actions {
       display: flex;
@@ -1045,6 +1197,62 @@
           </button>
           <div class="mic-status" id="mic-status">Or tap the cake directly to blow out!</div>
         </div>
+      <!-- DIGITAL HUSBAND COUPONS BOOKLET -->
+      <div class="coupons-container">
+        <div class="coupons-title">
+          <i class="fa-solid fa-ticket"></i> Redeemable Husband Coupons 🎟️
+        </div>
+        <div class="coupons-subtitle">
+          Tap any coupon below to claim it instantly via WhatsApp message to Binny!
+        </div>
+        <div class="coupons-grid">
+          <div class="coupon-card">
+            <div class="coupon-icon">🥐</div>
+            <div class="coupon-name">1x Free Breakfast in Bed</div>
+            <button class="coupon-claim-btn" onclick="claimCoupon('1x Free Breakfast in Bed 🥐', this)">
+              <i class="fa-brands fa-whatsapp"></i> Claim Coupon 📲
+            </button>
+          </div>
+
+          <div class="coupon-card">
+            <div class="coupon-icon">💆‍♀️</div>
+            <div class="coupon-name">1x 30-Min Foot/Back Massage</div>
+            <button class="coupon-claim-btn" onclick="claimCoupon('1x 30-Min Massage 💆‍♀️', this)">
+              <i class="fa-brands fa-whatsapp"></i> Claim Coupon 📲
+            </button>
+          </div>
+
+          <div class="coupon-card">
+            <div class="coupon-icon">🎟️</div>
+            <div class="coupon-name">1x "Binny Concedes Argument"</div>
+            <button class="coupon-claim-btn" onclick="claimCoupon('1x Binny Concedes Argument Wildcard 🎟️', this)">
+              <i class="fa-brands fa-whatsapp"></i> Claim Coupon 📲
+            </button>
+          </div>
+
+          <div class="coupon-card">
+            <div class="coupon-icon">🎬</div>
+            <div class="coupon-name">1x Movie & Snack Choice</div>
+            <button class="coupon-claim-btn" onclick="claimCoupon('1x Late Night Movie & Snack Choice 🎬', this)">
+              <i class="fa-brands fa-whatsapp"></i> Claim Coupon 📲
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEND BIRTHDAY WISH TO BINNY MESSAGE BOX -->
+      <div class="wish-box-container">
+        <div class="wish-box-title">
+          <i class="fa-solid fa-heart"></i> Send a Birthday Note Back to Binny 💌
+        </div>
+        <div class="wish-box-subtitle">
+          Type your message, wish, or response below to send directly to Binny's WhatsApp:
+        </div>
+        <textarea class="wish-textarea" id="wish-textarea" placeholder="Type your birthday note or response here... 💕"></textarea>
+        <br/>
+        <button class="send-wish-btn" onclick="sendWishToBinny()">
+          <i class="fa-brands fa-whatsapp"></i> Send to Binny 💌
+        </button>
       </div>
 
       <div class="reveal-actions">
@@ -1545,6 +1753,47 @@
         navigator.clipboard.writeText(shareText);
         alert("Verdict Certificate copied to clipboard! You can paste and share it with Sandhaya! 📲");
       }
+    }
+
+    /* HUSBAND COUPON CLAIM VIA WHATSAPP (+918868898356) */
+    function claimCoupon(couponName, btnEl) {
+      burstConfetti(60);
+      playChime(987.77, 'triangle', 0.4);
+
+      if (btnEl) {
+        btnEl.classList.add('claimed');
+        btnEl.innerHTML = `<i class="fa-solid fa-check"></i> Claimed! 🎉`;
+      }
+
+      const phoneNumber = "918868898356";
+      const message = `Hey Binny! ❤️ I am redeeming my Birthday Coupon: *${couponName}*! 🎟️✨`;
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 300);
+    }
+
+    /* SEND WISH TO BINNY VIA WHATSAPP (+918868898356) */
+    function sendWishToBinny() {
+      const textarea = document.getElementById('wish-textarea');
+      const userMessage = textarea ? textarea.value.trim() : '';
+
+      if (!userMessage) {
+        alert("Please write a small message or note first! 💕");
+        return;
+      }
+
+      burstConfetti(80);
+      playChime(1046.5, 'sine', 0.5);
+
+      const phoneNumber = "918868898356";
+      const fullMessage = `Hey Binny! ❤️ Here is my birthday note:\n\n"${userMessage}" 💌🎂`;
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
+
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 300);
     }
 
     /* INITIALIZATION */
