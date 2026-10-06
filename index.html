@@ -1079,6 +1079,8 @@
       setTimeout(() => { dodgeTip.style.opacity = '0'; }, 1200);
     }
 
+    let isTransitioning = false;
+
     function onDodgeTrigger(e) {
       const btn = e.currentTarget;
       moveButtonAway(btn);
@@ -1086,7 +1088,11 @@
 
     function attachDodgeListeners(btn) {
       btn.onmouseenter = onDodgeTrigger;
-      btn.ontouchstart = (e) => { e.preventDefault(); onDodgeTrigger(e); };
+      btn.ontouchstart = (e) => { 
+        if (e.cancelable) e.preventDefault(); 
+        e.stopPropagation();
+        onDodgeTrigger(e); 
+      };
       btn.onmousemove = onDodgeTrigger;
     }
 
@@ -1098,7 +1104,25 @@
 
     /* QUIZ ANSWER HANDLER */
     function handleAnswer(selectedChoice) {
+      if (isTransitioning) return;
+
       const currentQ = quizData[currentStep];
+
+      // Block wrong / dodging choice from advancing the question!
+      if (currentQ.dodge === selectedChoice) {
+        const btn = selectedChoice === 'Sandhaya' ? btnSandhaya : btnBinny;
+        moveButtonAway(btn);
+        
+        const toast = document.getElementById('quiz-toast');
+        const toastText = document.getElementById('toast-text');
+        toastText.textContent = `Nice try! You can't pick ${selectedChoice}! 😜`;
+        toast.classList.add('visible');
+        setTimeout(() => { toast.classList.remove('visible'); }, 1200);
+        return; // Do NOT advance question!
+      }
+
+      // Lock transition to prevent multi-tap skipping
+      isTransitioning = true;
 
       // Play chime
       playChime(880, 'sine', 0.25);
@@ -1113,6 +1137,7 @@
       setTimeout(() => {
         toast.classList.remove('visible');
         currentStep++;
+        isTransitioning = false;
         if (currentStep < quizData.length) {
           updateQuestion();
         } else {
