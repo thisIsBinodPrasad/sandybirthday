@@ -633,32 +633,174 @@
       margin-top: 10px;
     }
 
-    /* CAKE INTERACTIVE SECTION */
-    .cake-container {
-      margin: 30px auto 20px;
-      display: inline-block;
-      cursor: pointer;
+    /* INTERACTIVE CAKE WIDGET */
+    .cake-widget-container {
+      margin: 25px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      border: 2px dashed #ffb703;
+      max-width: 440px;
+      box-shadow: 0 8px 25px rgba(255, 183, 3, 0.15);
       position: relative;
     }
 
-    .cake-btn {
-      background: white;
-      border: 2px solid var(--soft-pink);
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-weight: 700;
-      color: var(--deep-crimson);
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 6px 20px rgba(255, 107, 139, 0.15);
-      transition: all 0.3s ease;
+    .interactive-cake {
+      font-size: 3.8rem;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s ease;
+      margin-top: 10px;
     }
 
-    .cake-btn:hover {
+    .interactive-cake:hover {
+      transform: scale(1.08);
+    }
+
+    .candle-flames {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .flame {
+      width: 10px;
+      height: 16px;
+      background: radial-gradient(circle, #fff 20%, #ffd700 60%, #ff4500 100%);
+      border-radius: 50% 50% 20% 20%;
+      animation: candleFlicker 0.6s infinite alternate ease-in-out;
+      box-shadow: 0 0 10px #ffb703, 0 0 20px #ff4757;
+      transition: opacity 0.5s ease;
+    }
+
+    .flame.blown-out {
+      opacity: 0;
+      box-shadow: none;
+    }
+
+    @keyframes candleFlicker {
+      0% { transform: scale(1) rotate(-3deg); }
+      100% { transform: scale(1.15) rotate(3deg); }
+    }
+
+    .smoke-particle {
+      position: absolute;
+      top: -20px;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: floatSmoke 2s forwards ease-out;
+    }
+
+    @keyframes floatSmoke {
+      0% { transform: translateY(0) scale(0.6); opacity: 0.8; }
+      100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+    }
+
+    .cake-controls {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mic-btn {
+      background: linear-gradient(135deg, #ffb703, #ff8c00);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mic-btn:hover {
       transform: scale(1.05);
-      background: var(--soft-pink);
+    }
+
+    .mic-status {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* OFFICIAL VERDICT CERTIFICATE CARD */
+    .certificate-card {
+      margin: 30px auto 20px;
+      background: linear-gradient(135deg, #fffdf0 0%, #fff4d6 100%);
+      border: 3px double #d4af37;
+      border-radius: 20px;
+      padding: 26px 18px;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.25);
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .cert-ribbon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+      color: #d4af37;
+    }
+
+    .cert-header {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #900c3f;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+      padding-bottom: 6px;
+      display: inline-block;
+    }
+
+    .cert-body {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .cert-signature {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.1rem;
+      color: var(--deep-crimson);
+      font-weight: 700;
+    }
+
+    .cert-share-btn {
+      margin-top: 12px;
+      background: #900c3f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(144, 12, 63, 0.3);
+      transition: transform 0.25s ease;
+    }
+
+    .cert-share-btn:hover {
+      transform: scale(1.04);
     }
 
     /* Action Toolbar */
@@ -867,14 +1009,42 @@
         Thank you for bringing endless joy, laughter, and warmth into my life every single day!
       </p>
 
-      <div class="cake-container" onclick="triggerCandleBlow()">
-        <div class="cake-btn" id="cake-btn">
-          <i class="fa-solid fa-cake-candles"></i> Click to Blow Out Candles & Make a Wish! 🎂
-        </div>
-      </div>
-
       <div class="husband-signature">
         Always Yours, Binny ❤️
+      </div>
+
+      <!-- OFFICIAL VERDICT CERTIFICATE CARD -->
+      <div class="certificate-card" id="certificate-card">
+        <div class="cert-ribbon">📜 🏅 📜</div>
+        <div class="cert-header">OFFICIAL VERDICT</div>
+        <div class="cert-body">
+          This certifies that <strong>Binny</strong> is 100% innocent and <strong>Sandhaya</strong> is 100% guilty of all relationship crimes.<br/><br/>
+          <em>Still Binny Loves you more than ever. ❤️</em>
+        </div>
+        <div class="cert-signature">
+          Signed: Binny & The Truth Quiz Committee ✍️
+        </div>
+        <button class="cert-share-btn" onclick="shareCertificate()">
+          <i class="fa-solid fa-share-nodes"></i> Share Verdict Certificate 📲
+        </button>
+      </div>
+
+      <!-- INTERACTIVE CAKE & CANDLE BLOWER -->
+      <div class="cake-widget-container">
+        <div class="interactive-cake" id="cake-element" onclick="blowCandlesDirectly()">
+          <div class="candle-flames">
+            <div class="flame" id="flame-1"></div>
+            <div class="flame" id="flame-2"></div>
+            <div class="flame" id="flame-3"></div>
+          </div>
+          🎂
+        </div>
+        <div class="cake-controls">
+          <button class="mic-btn" id="mic-btn" onclick="initMicBlowing()">
+            <i class="fa-solid fa-microphone"></i> Tap to Enable Mic & Blow Candles! 💨
+          </button>
+          <div class="mic-status" id="mic-status">Or tap the cake directly to blow out!</div>
+        </div>
       </div>
 
       <div class="reveal-actions">
@@ -1283,6 +1453,98 @@
         }
       }
       requestAnimationFrame(updateConfetti);
+    }
+
+    /* INTERACTIVE CANDLE BLOWER WITH MICROPHONE AUDIO DETECTOR */
+    let micAudioCtx = null;
+    let micStream = null;
+    let candlesBlown = false;
+
+    function blowCandlesDirectly() {
+      if (candlesBlown) return;
+      candlesBlown = true;
+
+      // Extinguish flames
+      document.querySelectorAll('.flame').forEach(f => f.classList.add('blown-out'));
+      
+      // Spawn smoke
+      const cakeEl = document.getElementById('cake-element');
+      for (let i = 0; i < 3; i++) {
+        const smoke = document.createElement('span');
+        smoke.className = 'smoke-particle';
+        smoke.textContent = '☁️';
+        smoke.style.left = `${40 + i * 12}%`;
+        cakeEl.appendChild(smoke);
+        setTimeout(() => smoke.remove(), 2000);
+      }
+
+      burstConfetti(120);
+      playChime(1046.5, 'sine', 0.5);
+
+      const status = document.getElementById('mic-status');
+      status.innerHTML = `<span style="color:var(--deep-crimson); font-weight:700;">Wish Made! Candles Blown Out! 🎂✨</span>`;
+      const micBtn = document.getElementById('mic-btn');
+      if (micBtn) micBtn.style.display = 'none';
+
+      if (micStream) {
+        micStream.getTracks().forEach(track => track.stop());
+      }
+    }
+
+    async function initMicBlowing() {
+      if (candlesBlown) return;
+      const status = document.getElementById('mic-status');
+      const micBtn = document.getElementById('mic-btn');
+
+      try {
+        status.textContent = 'Listening... Blow into your microphone! 🌬️';
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        micAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        const source = micAudioCtx.createMediaStreamSource(micStream);
+        const analyser = micAudioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        
+        function checkBlowing() {
+          if (candlesBlown) return;
+          analyser.getByteFrequencyData(dataArray);
+          
+          let average = 0;
+          for (let i = 0; i < dataArray.length; i++) {
+            average += dataArray[i];
+          }
+          average /= dataArray.length;
+
+          // If volume spike detected (blowing sound into mic)
+          if (average > 45) {
+            blowCandlesDirectly();
+          } else {
+            requestAnimationFrame(checkBlowing);
+          }
+        }
+        checkBlowing();
+      } catch (err) {
+        status.textContent = 'Mic access denied or unavailable. Tap the cake directly to blow out! 🎂';
+      }
+    }
+
+    /* CERTIFICATE SHARING HELPER */
+    function shareCertificate() {
+      const shareText = "OFFICIAL VERDICT: This certifies that Binny is 100% innocent and Sandhaya is 100% guilty of all relationship crimes. Still Binny Loves you more than ever. Signed: Binny & The Truth Quiz Committee ✍️";
+      
+      if (navigator.share) {
+        navigator.share({
+          title: "Official Verdict Certificate",
+          text: shareText,
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(shareText);
+        alert("Verdict Certificate copied to clipboard! You can paste and share it with Sandhaya! 📲");
+      }
     }
 
     /* INITIALIZATION */
