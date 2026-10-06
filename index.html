@@ -343,44 +343,52 @@
     }
 
     .question-title {
-      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
       font-weight: 700;
       color: var(--text-dark);
       line-height: 1.35;
-      min-height: 60px;
+      min-height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-    /* Dodging Arena */
+    }
+
+    /* Dodging Arena & Choice Slots */
     .answers-container {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       justify-content: center;
       align-items: center;
-      margin-top: 25px;
+      margin-top: 20px;
       position: relative;
-      min-height: 110px;
-      padding: 8px;
+      width: 100%;
+      min-height: 65px;
+      padding: 4px;
+    }
+
+    .choice-slot {
+      flex: 1;
+      height: 54px;
+      position: relative;
     }
 
     .choice-btn {
-      flex: 1;
-      max-width: 220px;
-      min-height: 75px;
-      padding: 14px 16px;
+      width: 100%;
+      height: 100%;
+      padding: 10px 16px;
       background: white;
       border: 2px solid #ffe0e6;
-      border-radius: 18px;
+      border-radius: 14px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 1.1rem;
+      gap: 8px;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-dark);
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
       user-select: none;
       position: relative;
@@ -388,7 +396,7 @@
     }
 
     .choice-btn i {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
 
     .choice-btn.binny {
@@ -403,15 +411,20 @@
 
     .choice-btn:hover {
       border-color: var(--primary-pink);
-      box-shadow: 0 12px 25px rgba(255, 107, 139, 0.25);
+      box-shadow: 0 8px 18px rgba(255, 107, 139, 0.2);
     }
 
     .choice-btn.dodging {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 10;
       border-color: var(--romantic-red);
       background: #fff8f9;
+      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.25);
     }
 
     .dodge-tooltip {
@@ -804,18 +817,22 @@
         </div>
 
         <div class="answers-container" id="answers-arena">
-          <!-- Binny Choice -->
-          <button class="choice-btn binny" id="btn-binny" onclick="handleAnswer('Binny')">
-            <i class="fa-solid fa-user-tie"></i>
-            <span>Binny</span>
-          </button>
+          <!-- Binny Choice Slot -->
+          <div class="choice-slot">
+            <button class="choice-btn binny" id="btn-binny" onclick="handleAnswer('Binny')">
+              <i class="fa-solid fa-user-tie"></i>
+              <span>Binny</span>
+            </button>
+          </div>
 
-          <!-- Sandhaya Choice -->
-          <button class="choice-btn sandhaya" id="btn-sandhaya" onclick="handleAnswer('Sandhaya')">
-            <i class="fa-solid fa-crown"></i>
-            <span>Sandhaya</span>
-            <span class="dodge-tooltip" id="dodge-tip">Too slow! 😜</span>
-          </button>
+          <!-- Sandhaya Choice Slot -->
+          <div class="choice-slot">
+            <button class="choice-btn sandhaya" id="btn-sandhaya" onclick="handleAnswer('Sandhaya')">
+              <i class="fa-solid fa-crown"></i>
+              <span>Sandhaya</span>
+              <span class="dodge-tooltip" id="dodge-tip">Too slow! 😜</span>
+            </button>
+          </div>
         </div>
 
         <div class="quiz-toast" id="quiz-toast">
