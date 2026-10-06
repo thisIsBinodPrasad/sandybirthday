@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Sandhaya! 🎉 | From Binny with Love</title>
+  <meta name="description" content="A special, playful birthday celebration & couples quiz for Sandhaya from her husband Binny! ❤️" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary-pink: #ff6b8b;
+      --soft-pink: #ffe3e8;
+      --pastel-bg: #fff0f3;
+      --romantic-red: #ff4757;
+      --deep-crimson: #c9184a;
+      --warm-yellow: #ffd166;
+      --accent-gold: #ffb703;
+      --text-dark: #2f3542;
+      --text-muted: #57606f;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --glass-shadow: 0 15px 35px rgba(255, 107, 139, 0.2);
+      --card-radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 40%, #fff9e6 70%, #ffdde1 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* Background Floating Decor */
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: rgba(255, 107, 139, 0.25);
+      animation: floatUp 12s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Audio Toggle Floating Button */
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: linear-gradient(135deg, var(--primary-pink), var(--romantic-red));
+      color: white;
+      border: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+    }
+
+    .music-btn.playing {
+      animation: pulseMusic 1.5s infinite;
+    }
+
+    @keyframes pulseMusic {
+      0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(255, 71, 87, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+    }
+
+    /* Container layout */
+    .app-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SECTION 1: HERO HEADER */
+    .hero-section {
+      text-align: center;
+      padding: 40px 15px 30px;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--deep-crimson);
+      box-shadow: 0 4px 15px rgba(255, 107, 139, 0.15);
+      margin-bottom: 20px;
+      border: 1px solid var(--soft-pink);
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--deep-crimson) 0%, var(--romantic-red) 50%, #e84393 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 20px rgba(255, 107, 139, 0.15);
+      animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 35px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .hero-subtitle span {
+      color: var(--deep-crimson);
+      font-weight: 700;
+    }
+
+    /* POLAROID GALLERY */
+    .polaroid-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin: 20px 0 40px;
+      width: 100%;
+    }
+
+    .polaroid-card {
+      background: white;
+      padding: 14px 14px 22px 14px;
+      border-radius: 4px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      width: 250px;
+      text-align: center;
+    }
+
+    .polaroid-card:nth-child(1) { transform: rotate(-4deg); }
+    .polaroid-card:nth-child(2) { transform: rotate(2deg) scale(1.05); z-index: 2; }
+    .polaroid-card:nth-child(3) { transform: rotate(-2deg); }
+
+    .polaroid-card:hover {
+      transform: rotate(0deg) scale(1.1) translateY(-10px) !important;
+      box-shadow: 0 20px 40px rgba(255, 71, 87, 0.25);
+      z-index: 10;
+    }
+
+    .polaroid-img-wrapper {
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+      background: #f1f2f6;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .polaroid-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .polaroid-card:hover .polaroid-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      color: #2f3542;
+      margin-top: 12px;
+      font-weight: 700;
+    }
+
+    .scroll-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--romantic-red), var(--deep-crimson));
+      color: white;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255, 71, 87, 0.35);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .scroll-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 15px 35px rgba(255, 71, 87, 0.45);
+    }
+
+    .scroll-btn i {
+      animation: bounce 1.8s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(6px); }
+      60% { transform: translateY(3px); }
+    }
+
+    /* SECTION 2: QUIZ SECTION */
+    .quiz-section {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 15px;
+    }
+
+    .quiz-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--glass-shadow);
+      width: 100%;
+      max-width: 680px;
+      padding: 40px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .quiz-header {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .quiz-progress-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--soft-pink);
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 11%;
+      background: linear-gradient(90deg, var(--warm-yellow), var(--romantic-red));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .quiz-step-badge {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--deep-crimson);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .question-title {
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.35;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Dodging Arena */
+    .answers-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 35px;
+      position: relative;
+      min-height: 140px;
+      padding: 10px;
+    }
+
+    .choice-btn {
+      flex: 1;
+      max-width: 260px;
+      min-height: 100px;
+      padding: 18px 20px;
+      background: white;
+      border: 2px solid #ffe0e6;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      user-select: none;
+      position: relative;
+      z-index: 5;
+    }
+
+    .choice-btn i {
+      font-size: 1.8rem;
+    }
+
+    .choice-btn.binny {
+      color: #2e86de;
+      border-color: #d2e4ff;
+    }
+
+    .choice-btn.sandhaya {
+      color: var(--deep-crimson);
+      border-color: #ffd2dc;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--primary-pink);
+      box-shadow: 0 12px 25px rgba(255, 107, 139, 0.25);
+    }
+
+    .choice-btn.dodging {
+      position: absolute;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 10;
+      border-color: var(--romantic-red);
+      background: #fff8f9;
+    }
+
+    .dodge-tooltip {
+      position: absolute;
+      top: -30px;
+      background: #2f3542;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .choice-btn.dodging:hover .dodge-tooltip {
+      opacity: 1;
+    }
+
+    /* Quiz Toast Message */
+    .quiz-toast {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      color: var(--deep-crimson);
+      font-size: 0.95rem;
+      min-height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .quiz-toast.visible {
+      opacity: 1;
+    }
+
+    /* SECTION 3: TRANSITION & REVEAL SLIDES */
+    .transition-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e1022 0%, #3a0ca3 50%, #461220 100%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .transition-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .trans-text {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      max-width: 800px;
+      line-height: 1.3;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255, 107, 139, 0.6);
+      transform: scale(0.9);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .trans-text.show {
+      transform: scale(1);
+    }
+
+    /* GRAND REVEAL CARD */
+    .reveal-section {
+      display: none;
+      min-height: 100vh;
+      padding: 40px 15px 60px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .reveal-section.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .romantic-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 3px solid rgba(255, 255, 255, 0.95);
+      border-radius: 32px;
+      box-shadow: 0 25px 60px rgba(201, 24, 74, 0.25);
+      max-width: 720px;
+      width: 100%;
+      padding: 45px 35px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: floatCard 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .circular-frame-wrapper {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      margin: 0 auto 30px;
+    }
+
+    .circular-frame {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid white;
+      box-shadow: 0 12px 35px rgba(255, 71, 87, 0.35);
+      position: relative;
+      z-index: 2;
+    }
+
+    .frame-aura {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ff4757, #ffd166, #ff6b8b, #c9184a);
+      z-index: 1;
+      animation: spinAura 4s linear infinite;
+      filter: blur(8px);
+    }
+
+    @keyframes spinAura {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .crown-icon {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-10deg);
+      font-size: 2.8rem;
+      color: #ffd700;
+      z-index: 3;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      animation: wiggleCrown 2.5s infinite ease-in-out;
+    }
+
+    @keyframes wiggleCrown {
+      0%, 100% { transform: translateX(-50%) rotate(-10deg); }
+      50% { transform: translateX(-50%) rotate(10deg) scale(1.1); }
+    }
+
+    .reveal-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--deep-crimson);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .reveal-message {
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      line-height: 1.65;
+      color: var(--text-dark);
+      font-weight: 500;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+
+    .reveal-message highlight {
+      background: linear-gradient(120deg, rgba(255, 183, 3, 0.3) 0%, rgba(255, 107, 139, 0.3) 100%);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      color: var(--deep-crimson);
+    }
+
+    .husband-signature {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.6rem;
+      color: var(--deep-crimson);
+      margin-top: 10px;
+    }
+
+    /* CAKE INTERACTIVE SECTION */
+    .cake-container {
+      margin: 30px auto 20px;
+      display: inline-block;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cake-btn {
+      background: white;
+      border: 2px solid var(--soft-pink);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      color: var(--deep-crimson);
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(255, 107, 139, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .cake-btn:hover {
+      transform: scale(1.05);
+      background: var(--soft-pink);
+    }
+
+    /* Action Toolbar */
+    .reveal-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .action-btn {
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-replay {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-dark);
+      border: 2px solid #e0e0e0;
+    }
+
+    .btn-share {
+      background: linear-gradient(135deg, var(--primary-pink), var(--romantic-red));
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    footer i {
+      color: var(--romantic-red);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 600px) {
+      .hero-section { padding-top: 20px; }
+      .polaroid-gallery { gap: 15px; }
+      .polaroid-card { width: 100%; max-width: 280px; }
+      .quiz-card { padding: 30px 20px; }
+      .answers-container { flex-direction: column; min-height: 210px; }
+      .choice-btn { width: 100%; max-width: 100%; min-height: 80px; }
+      .romantic-card { padding: 35px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Canvas Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Background Hearts decor -->
+  <div class="bg-hearts" id="bg-hearts-container"></div>
+
+  <!-- Music Toggle Button -->
+  <button class="music-btn" id="music-toggle" title="Toggle Festive Birthday Music">
+    <i class="fa-solid fa-music"></i>
+  </button>
+
+  <div class="app-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="badge-pill">
+        <i class="fa-solid fa-heart"></i> Hosted with Love by Binny
+      </div>
+      
+      <h1 class="hero-title">Happy Birthday Sandhaya! 🎉</h1>
+      
+      <p class="hero-subtitle">
+        Welcome to your official Birthday Celebration & <span>The Great Couples Truth Quiz</span>! Let's settle the score once and for all... 😉
+      </p>
+
+      <!-- Polaroid Photo Wall -->
+      <div class="polaroid-gallery">
+        <div class="polaroid-card">
+          <div class="polaroid-img-wrapper">
+            <img src="couple_sunset.jpg" alt="Binny and Sandhaya Sunset" />
+          </div>
+          <div class="polaroid-caption">Sunset Magic 💕</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="polaroid-img-wrapper">
+            <img src="sandhaya_hero.jpg" alt="Sandhaya Birthday Queen" />
+          </div>
+          <div class="polaroid-caption">The Queen 👑 Sandhaya</div>
+        </div>
+
+        <div class="polaroid-card">
+          <div class="polaroid-img-wrapper">
+            <img src="couple_cafe.jpg" alt="Binny and Sandhaya Cafe" />
+          </div>
+          <div class="polaroid-caption">Coffee & Smiles ☕</div>
+        </div>
+      </div>
+
+      <button class="scroll-btn" onclick="scrollToQuiz()">
+        Start the Quiz <i class="fa-solid fa-arrow-down"></i>
+      </button>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section class="quiz-section" id="quiz-section">
+      <div class="quiz-card">
+        <div class="quiz-header">
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="quiz-step-badge" id="step-badge">Question 1 of 9</div>
+          <h2 class="question-title" id="question-text">Who is funnier in the house?</h2>
+        </div>
+
+        <div class="answers-container" id="answers-arena">
+          <!-- Binny Choice -->
+          <button class="choice-btn binny" id="btn-binny" onclick="handleAnswer('Binny')">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>Binny</span>
+          </button>
+
+          <!-- Sandhaya Choice -->
+          <button class="choice-btn sandhaya" id="btn-sandhaya" onclick="handleAnswer('Sandhaya')">
+            <i class="fa-solid fa-crown"></i>
+            <span>Sandhaya</span>
+            <span class="dodge-tooltip" id="dodge-tip">Too slow! 😜</span>
+          </button>
+        </div>
+
+        <div class="quiz-toast" id="quiz-toast">
+          <i class="fa-solid fa-face-laugh-wink"></i> <span id="toast-text">Pick your answer!</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TRANSITION OVERLAY SLIDES -->
+  <div class="transition-overlay" id="trans-overlay">
+    <h2 class="trans-text" id="trans-text">
+      Now we know who the real root cause is... 😉
+    </h2>
+  </div>
+
+  <!-- GRAND REVEAL SECTION -->
+  <section class="reveal-section" id="reveal-section">
+    <div class="romantic-card">
+      <div class="circular-frame-wrapper">
+        <div class="crown-icon">👑</div>
+        <div class="frame-aura"></div>
+        <img src="sandhaya_hero.jpg" alt="Sandhaya Birthday Queen" class="circular-frame" />
+      </div>
+
+      <h1 class="reveal-title">Happy Birthday My Love! ❤️</h1>
+
+      <p class="reveal-message">
+        Your husband loves you so much! Happy Birthday to my love, my better half! 🎂✨<br/>
+        Thank you for bringing endless joy, laughter, and warmth into my life every single day!
+      </p>
+
+      <div class="cake-container" onclick="triggerCandleBlow()">
+        <div class="cake-btn" id="cake-btn">
+          <i class="fa-solid fa-cake-candles"></i> Click to Blow Out Candles & Make a Wish! 🎂
+        </div>
+      </div>
+
+      <div class="husband-signature">
+        Always Yours, Binny ❤️
+      </div>
+
+      <div class="reveal-actions">
+        <button class="action-btn btn-share" onclick="burstConfetti(100)">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Celebrate Again 🎉
+        </button>
+        <button class="action-btn btn-replay" onclick="resetQuiz()">
+          <i class="fa-solid fa-rotate-left"></i> Replay Quiz 🔄
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      Crafted with ❤️ by Binny for Sandhaya's Special Birthday | 2026
+    </footer>
+  </section>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    /* QUIZ DATA & DODGING SPECIFICATIONS */
+    const quizData = [
+      {
+        question: "Who is funnier in the house? 🤣",
+        dodge: "Sandhaya", // Sandhaya dodges away!
+        binnyComment: "Binny: 'I agree 100%! Science proves it!' 😂",
+        sandhayaComment: "Sandhaya: 'Hey! The button ran away!' 😜"
+      },
+      {
+        question: "Who starts the fights? 💣",
+        dodge: "Binny", // Binny dodges away!
+        binnyComment: "Binny: 'I'm totally innocent here!' 😇",
+        sandhayaComment: "Sandhaya: 'Caught you red handed!' 😜"
+      },
+      {
+        question: "Who is the bigger drama queen? 🎭",
+        dodge: "Sandhaya", // Sandhaya dodges away!
+        binnyComment: "Binny: 'Oscar goes to... Sandhaya!' 🏆",
+        sandhayaComment: "Sandhaya: 'I am NOT dramatic!' 💅"
+      },
+      {
+        question: "Who forgets where their keys & phone are? 🔑",
+        dodge: "Sandhaya", // Sandhaya dodges away!
+        binnyComment: "Binny: 'Where are my keys... oh wait, yours!' 🕵️‍♂️",
+        sandhayaComment: "Sandhaya: 'They were hiding!' 🙈"
+      },
+      {
+        question: "Who gives in first after an argument? 🏳️",
+        dodge: "Binny", // Binny dodges away!
+        binnyComment: "Binny: 'Peace is priority #1!' 🕊️",
+        sandhayaComment: "Sandhaya: 'Binny always melts first!' 🥰"
+      },
+      {
+        question: "Who takes longer to get ready for an event? 👗",
+        dodge: "Sandhaya", // Sandhaya dodges away!
+        binnyComment: "Binny: 'I've been waiting in the car for 45 mins!' 🚗",
+        sandhayaComment: "Sandhaya: 'Perfection takes time!' ✨"
+      },
+      {
+        question: "Who controls the TV remote at night? 📺",
+        dodge: "Sandhaya", // Sandhaya dodges away!
+        binnyComment: "Binny: 'I haven't seen the remote since 2021!' 📺",
+        sandhayaComment: "Sandhaya: 'My shows, my rules!' 🍿"
+      },
+      {
+        question: "Who is the absolute boss in this relationship? 👑",
+        dodge: "Binny", // Binny dodges away!
+        binnyComment: "Binny: 'We all know who the real boss is!' 🫡",
+        sandhayaComment: "Sandhaya: 'Queen Sandhaya rules!' 👸"
+      },
+      {
+        question: "Who deserves the most amazing birthday present ever? 🎁",
+        dodge: "none", // Neither dodges!
+        binnyComment: "Binny: 'Sandhaya deserves the world!' ❤️",
+        sandhayaComment: "Sandhaya: 'YES! Bring on the gifts!' 🎉"
+      }
+    ];
+
+    let currentStep = 0;
+    let dodgeCount = 0;
+    const dodgeQuotes = [
+      "Too slow! 😜",
+      "Nice try! 💃",
+      "Nope! 🚀",
+      "Can't catch me! 🏃‍♀️",
+      "Binny is faster! ⚡",
+      "Try again! 😜",
+      "Not today! 💖"
+    ];
+
+    /* AUDIO ENGINE (Web Audio API Synthesizer) */
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playChime(freq = 523.25, type = 'sine', duration = 0.3) {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Play a happy birthday melody synthesis
+    function playBirthdayMelody() {
+      if (!isMusicPlaying) return;
+      const notes = [
+        { f: 264, d: 0.3 }, { f: 264, d: 0.3 }, { f: 297, d: 0.6 }, { f: 264, d: 0.6 }, { f: 352, d: 0.6 }, { f: 330, d: 1.0 },
+        { f: 264, d: 0.3 }, { f: 264, d: 0.3 }, { f: 297, d: 0.6 }, { f: 264, d: 0.6 }, { f: 396, d: 0.6 }, { f: 352, d: 1.0 }
+      ];
+      let delay = 0;
+      notes.forEach(n => {
+        setTimeout(() => {
+          if (isMusicPlaying) playChime(n.f, 'triangle', n.d);
+        }, delay * 1000);
+        delay += n.d;
+      });
+    }
+
+    document.getElementById('music-toggle').addEventListener('click', () => {
+      initAudio();
+      isMusicPlaying = !isMusicPlaying;
+      const btn = document.getElementById('music-toggle');
+      if (isMusicPlaying) {
+        btn.classList.add('playing');
+        playBirthdayMelody();
+        musicInterval = setInterval(playBirthdayMelody, 8000);
+      } else {
+        btn.classList.remove('playing');
+        if (musicInterval) clearInterval(musicInterval);
+      }
+    });
+
+    /* SCROLL FUNCTION */
+    function scrollToQuiz() {
+      document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* DODGING LOGIC */
+    const arena = document.getElementById('answers-arena');
+    const btnBinny = document.getElementById('btn-binny');
+    const btnSandhaya = document.getElementById('btn-sandhaya');
+    const dodgeTip = document.getElementById('dodge-tip');
+
+    function applyDodgeLogic() {
+      const currentQ = quizData[currentStep];
+
+      // Reset transformations
+      btnBinny.style.transform = 'translate(0px, 0px)';
+      btnSandhaya.style.transform = 'translate(0px, 0px)';
+      btnBinny.classList.remove('dodging');
+      btnSandhaya.classList.remove('dodging');
+
+      if (currentQ.dodge === 'Sandhaya') {
+        btnSandhaya.classList.add('dodging');
+        attachDodgeListeners(btnSandhaya);
+        removeDodgeListeners(btnBinny);
+      } else if (currentQ.dodge === 'Binny') {
+        btnBinny.classList.add('dodging');
+        attachDodgeListeners(btnBinny);
+        removeDodgeListeners(btnSandhaya);
+      } else {
+        removeDodgeListeners(btnBinny);
+        removeDodgeListeners(btnSandhaya);
+      }
+    }
+
+    function moveButtonAway(btn) {
+      const arenaRect = arena.getBoundingClientRect();
+      const btnRect = btn.getBoundingClientRect();
+
+      // Random offset calculation inside safe boundaries
+      const maxDeltaX = window.innerWidth < 600 ? 90 : 180;
+      const maxDeltaY = 80;
+
+      let randomX = (Math.random() - 0.5) * maxDeltaX * 2;
+      let randomY = (Math.random() - 0.5) * maxDeltaY * 2;
+
+      // Keep inside screen viewport
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      
+      dodgeCount++;
+      playChime(600 + Math.random() * 200, 'sine', 0.15);
+
+      // Show dodge tooltip quote
+      dodgeTip.textContent = dodgeQuotes[Math.floor(Math.random() * dodgeQuotes.length)];
+      dodgeTip.style.opacity = '1';
+      setTimeout(() => { dodgeTip.style.opacity = '0'; }, 1200);
+    }
+
+    function onDodgeTrigger(e) {
+      const btn = e.currentTarget;
+      moveButtonAway(btn);
+    }
+
+    function attachDodgeListeners(btn) {
+      btn.onmouseenter = onDodgeTrigger;
+      btn.ontouchstart = (e) => { e.preventDefault(); onDodgeTrigger(e); };
+      btn.onmousemove = onDodgeTrigger;
+    }
+
+    function removeDodgeListeners(btn) {
+      btn.onmouseenter = null;
+      btn.ontouchstart = null;
+      btn.onmousemove = null;
+    }
+
+    /* QUIZ ANSWER HANDLER */
+    function handleAnswer(selectedChoice) {
+      const currentQ = quizData[currentStep];
+
+      // Play chime
+      playChime(880, 'sine', 0.25);
+      burstConfetti(20);
+
+      // Toast feedback
+      const toast = document.getElementById('quiz-toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = selectedChoice === 'Binny' ? currentQ.binnyComment : currentQ.sandhayaComment;
+      toast.classList.add('visible');
+
+      setTimeout(() => {
+        toast.classList.remove('visible');
+        currentStep++;
+        if (currentStep < quizData.length) {
+          updateQuestion();
+        } else {
+          startRevealSequence();
+        }
+      }, 1200);
+    }
+
+    function updateQuestion() {
+      const q = quizData[currentStep];
+      document.getElementById('question-text').textContent = q.question;
+      document.getElementById('step-badge').textContent = `Question ${currentStep + 1} of ${quizData.length}`;
+      
+      // Progress bar fill
+      const pct = ((currentStep + 1) / quizData.length) * 100;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+
+      applyDodgeLogic();
+    }
+
+    /* REVEAL TRANSITION SEQUENCE */
+    function startRevealSequence() {
+      const overlay = document.getElementById('trans-overlay');
+      const transText = document.getElementById('trans-text');
+
+      overlay.classList.add('active');
+      transText.classList.add('show');
+      playChime(440, 'triangle', 0.5);
+
+      // Step 1: "Now we know who the real root cause is... 😉" (2 seconds)
+      setTimeout(() => {
+        transText.style.opacity = '0';
+        transText.style.transform = 'scale(0.8)';
+        
+        // Step 2: "BUT..." (1.5 seconds)
+        setTimeout(() => {
+          transText.textContent = "BUT... ❤️";
+          transText.style.opacity = '1';
+          transText.style.transform = 'scale(1.2)';
+          playChime(659.25, 'triangle', 0.6);
+
+          setTimeout(() => {
+            overlay.classList.remove('active');
+            
+            // Show Final Reveal Card
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'none';
+            const revealSec = document.getElementById('reveal-section');
+            revealSec.classList.add('active');
+            revealSec.scrollIntoView({ behavior: 'smooth' });
+
+            burstConfetti(180);
+            
+            // Autoplay birthday music if allowed
+            if (!isMusicPlaying) {
+              document.getElementById('music-toggle').click();
+            }
+          }, 1500);
+        }, 600);
+      }, 2200);
+    }
+
+    function triggerCandleBlow() {
+      burstConfetti(120);
+      playChime(1046.5, 'sine', 0.5);
+      const btn = document.getElementById('cake-btn');
+      btn.innerHTML = `<i class="fa-solid fa-heart" style="color:#ff4757;"></i> Wish Made! Candles Blown! ✨💖`;
+    }
+
+    function resetQuiz() {
+      currentStep = 0;
+      document.getElementById('reveal-section').classList.remove('active');
+      document.getElementById('hero').style.display = 'flex';
+      document.getElementById('quiz-section').style.display = 'flex';
+      updateQuestion();
+      document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* BACKGROUND HEARTS SPINNER */
+    function createBgHearts() {
+      const container = document.getElementById('bg-hearts-container');
+      const icons = ['fa-heart', 'fa-sparkles', 'fa-star'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('i');
+        heart.className = `fa-solid ${icons[Math.floor(Math.random() * icons.length)]} floating-heart`;
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${8 + Math.random() * 10}s`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        heart.style.fontSize = `${12 + Math.random() * 20}px`;
+        container.appendChild(heart);
+      }
+    }
+
+    /* HTML5 CANVAS CONFETTI ENGINE */
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let confettiParticles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function burstConfetti(count = 50) {
+      const colors = ['#ff4757', '#ff6b8b', '#ffd166', '#00d2d3', '#ff9ff3', '#feca57'];
+      for (let i = 0; i < count; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+          y: window.innerHeight / 2 + (Math.random() - 0.5) * 200,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.8) * 14,
+          size: 6 + Math.random() * 8,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rSpeed: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = confettiParticles.length - 1; i >= 0; i--) {
+        const p = confettiParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.25; // gravity
+        p.rotation += p.rSpeed;
+        p.opacity -= 0.008;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+
+        if (p.opacity <= 0 || p.y > canvas.height) {
+          confettiParticles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(updateConfetti);
+    }
+
+    /* INITIALIZATION */
+    window.addEventListener('DOMContentLoaded', () => {
+      createBgHearts();
+      updateQuestion();
+      updateConfetti();
+      burstConfetti(40);
+    });
+  </script>
+</body>
+</html>
