@@ -2367,7 +2367,11 @@
       img.onload = () => {
         gc.save();
         gc.beginPath(); gc.arc(400, 370, 240, 0, Math.PI * 2); gc.clip();
-        gc.drawImage(img, 160, 130, 480, 480);
+        // Cover-fit: maintain aspect ratio, fill the circle
+        const cR = 240, cx = 400, cy = 370;
+        const scale = Math.max((cR * 2) / img.naturalWidth, (cR * 2) / img.naturalHeight);
+        const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+        gc.drawImage(img, cx - dw / 2, cy - dh / 2, dw, dh);
         gc.restore();
         gc.strokeStyle = '#ff6b8b'; gc.lineWidth = 8;
         gc.beginPath(); gc.arc(400, 370, 240, 0, Math.PI * 2); gc.stroke();
@@ -2384,7 +2388,7 @@
         gc.strokeStyle = 'rgba(255,107,139,0.4)';
         gc.beginPath(); gc.moveTo(80, 990); gc.lineTo(720, 990); gc.stroke();
         gc.fillStyle = 'rgba(200,100,130,0.6)'; gc.font = '22px Outfit';
-        gc.fillText('🎂 October 9, 2026 🎂', 400, 1040);
+        gc.fillText('🎂 October 12, 2026 🎂', 400, 1040);
         const link = document.createElement('a');
         link.download = 'sandhaya-birthday-card.jpg';
         link.href = genCanvas.toDataURL('image/jpeg', 0.92);
