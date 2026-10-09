@@ -1299,6 +1299,38 @@
       color: var(--romantic-red);
     }
 
+    /* ===== CONSTELLATION CANVAS ===== */
+    #constellation-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 0;
+    }
+    /* Hide the old floating hearts — constellation replaces them */
+    .bg-hearts { display: none !important; }
+
+    /* ===== PARTICLE TRAIL CANVAS ===== */
+    #particle-trail-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 50;
+    }
+
+    /* ===== SCROLL REVEAL — MEMORY POLAROIDS ===== */
+    .memory-polaroid {
+      /* base transition extended to include filter + opacity */
+      transition: filter 1s ease, opacity 1s ease,
+                  transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                  box-shadow 0.4s ease !important;
+    }
+    .memory-polaroid.photo-hidden {
+      filter: blur(12px) saturate(0.15) brightness(0.8);
+      opacity: 0.25;
+    }
+    .memory-polaroid.photo-revealed {
+      filter: blur(0px) saturate(1) brightness(1);
+      opacity: 1;
+    }
+
     /* ===== ENVELOPE OVERLAY ===== */
     .envelope-overlay {
       position: fixed; top: 0; left: 0;
@@ -1681,7 +1713,13 @@
   <!-- Fireworks Canvas -->
   <canvas id="fireworks-canvas"></canvas>
 
-  <!-- Background Hearts decor -->
+  <!-- Constellation Background Canvas (replaces floating hearts) -->
+  <canvas id="constellation-canvas"></canvas>
+
+  <!-- Particle Trail Canvas -->
+  <canvas id="particle-trail-canvas"></canvas>
+
+  <!-- Background Hearts decor (kept in DOM but hidden; constellation replaces it) -->
   <div class="bg-hearts" id="bg-hearts-container"></div>
 
   <!-- Music Toggle Button -->
@@ -2712,6 +2750,8 @@ It would be to spend every second of it looking at you.`;
       const poemSec = document.getElementById('poem-section');
       poemSec.classList.add('active');
       poemSec.scrollIntoView({ behavior: 'smooth' });
+      // Re-init scroll reveal now that polaroids are visible in the DOM
+      setTimeout(initScrollReveal, 400);
 
       const target = document.getElementById('poem-text-target');
       const penContainer = document.getElementById('poem-pen-container');
@@ -3168,9 +3208,172 @@ It would be to spend every second of it looking at you.`;
       }, 300);
     }
 
+    /* ===== CONSTELLATION BACKGROUND ===== */
+    function initConstellations() {
+      const cvs = document.getElementById('constellation-canvas');
+      const ctx2 = cvs.getContext('2d');
+      function resize() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const NUM = 95;
+      const stars = Array.from({ length: NUM }, () => ({
+        x: Math.random() * cvs.width,
+        y: Math.random() * cvs.height,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.12,
+        r: 0.7 + Math.random() * 1.6,
+        alpha: 0.35 + Math.random() * 0.45,
+        base: 0.35 + Math.random() * 0.45,
+        tSpeed: 0.008 + Math.random() * 0.015,
+        tDir: Math.random() > 0.5 ? 1 : -1
+      }));
+
+      const MAX_D = 130;
+
+      function draw() {
+        ctx2.clearRect(0, 0, cvs.width, cvs.height);
+
+        // Wrap & twinkle
+        stars.forEach(s => {
+          s.x = (s.x + s.vx + cvs.width) % cvs.width;
+          s.y = (s.y + s.vy + cvs.height) % cvs.height;
+          s.alpha += s.tSpeed * s.tDir;
+          if (s.alpha > s.base + 0.25 || s.alpha < s.base - 0.2) s.tDir *= -1;
+          s.alpha = Math.max(0.05, Math.min(0.9, s.alpha));
+        });
+
+        // Constellation lines
+        for (let i = 0; i < stars.length; i++) {
+          for (let j = i + 1; j < stars.length; j++) {
+            const dx = stars[i].x - stars[j].x, dy = stars[i].y - stars[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < MAX_D) {
+              const a = (1 - d / MAX_D) * 0.18;
+              ctx2.beginPath();
+              ctx2.moveTo(stars[i].x, stars[i].y);
+              ctx2.lineTo(stars[j].x, stars[j].y);
+              ctx2.strokeStyle = `rgba(255,180,210,${a})`;
+              ctx2.lineWidth = 0.6;
+              ctx2.stroke();
+            }
+          }
+        }
+
+        // Stars + glow
+        stars.forEach(s => {
+          // Outer glow
+          const grd = ctx2.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+          grd.addColorStop(0, `rgba(255,210,230,${s.alpha * 0.5})`);
+          grd.addColorStop(1, 'rgba(255,150,180,0)');
+          ctx2.beginPath();
+          ctx2.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+          ctx2.fillStyle = grd;
+          ctx2.fill();
+          // Core
+          ctx2.beginPath();
+          ctx2.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx2.fillStyle = `rgba(255,235,245,${s.alpha})`;
+          ctx2.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    /* ===== PARTICLE TRAIL ===== */
+    function initParticleTrail() {
+      const cvs = document.getElementById('particle-trail-canvas');
+      const ctx2 = cvs.getContext('2d');
+      function resize() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const SYMBOLS = ['❤️','✨','💕','💫','🌸','⭐','💖'];
+      const particles = [];
+      let lastX = -999, lastY = -999;
+
+      function spawn(x, y) {
+        particles.push({
+          x, y,
+          sym: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
+          size: 11 + Math.random() * 12,
+          vx: (Math.random() - 0.5) * 1.8,
+          vy: -(0.6 + Math.random() * 1.8),
+          opacity: 1,
+          rot: Math.random() * Math.PI * 2,
+          rSpeed: (Math.random() - 0.5) * 0.12
+        });
+      }
+
+      function onMove(x, y) {
+        if (Math.abs(x - lastX) + Math.abs(y - lastY) > 18) {
+          spawn(x, y);
+          lastX = x; lastY = y;
+        }
+      }
+
+      document.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+      document.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        onMove(t.clientX, t.clientY);
+      }, { passive: true });
+
+      function animate() {
+        ctx2.clearRect(0, 0, cvs.width, cvs.height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy;
+          p.vy += 0.02; // very subtle gravity
+          p.rot += p.rSpeed;
+          p.opacity -= 0.022;
+          if (p.opacity <= 0) { particles.splice(i, 1); continue; }
+          ctx2.save();
+          ctx2.globalAlpha = p.opacity;
+          ctx2.font = `${p.size}px serif`;
+          ctx2.textAlign = 'center';
+          ctx2.textBaseline = 'middle';
+          ctx2.translate(p.x, p.y);
+          ctx2.rotate(p.rot);
+          ctx2.fillText(p.sym, 0, 0);
+          ctx2.restore();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    /* ===== SCROLL REVEAL — MEMORY GALLERY ===== */
+    function initScrollReveal() {
+      const polaroids = document.querySelectorAll('.memory-polaroid');
+      // Start all hidden
+      polaroids.forEach(p => p.classList.add('photo-hidden'));
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+            const el = entry.target;
+            const idx = [...polaroids].indexOf(el);
+            // Staggered reveal — each polaroid develops slightly after the previous
+            setTimeout(() => {
+              el.classList.remove('photo-hidden');
+              el.classList.add('photo-revealed');
+            }, idx * 120);
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      polaroids.forEach(p => observer.observe(p));
+    }
+
     /* INITIALIZATION */
     window.addEventListener('DOMContentLoaded', () => {
-      createBgHearts();
+      createBgHearts(); // kept but hidden; constellation takes over
+      initConstellations();
+      initParticleTrail();
+      initScrollReveal();
       updateQuestion();
       updateConfetti();
       burstConfetti(40);
