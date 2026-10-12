@@ -1532,7 +1532,7 @@
     .scratch-title { font-size: 1.15rem; font-weight: 800; color: var(--deep-crimson); margin-bottom: 5px; }
     .scratch-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
     .scratch-canvas-wrapper { position: relative; display: inline-block; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 35px rgba(255,107,139,0.3); cursor: crosshair; }
-    #scratch-canvas { display: block; touch-action: none; }
+    #scratch-canvas { display: block; touch-action: none; position: relative; z-index: 1; }
     .scratch-reveal-text {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -2249,14 +2249,14 @@
         }
         const pct = transparent / (totalPixels) * 100;
         const hint = document.getElementById('scratch-hint');
-        if (pct > 50 && !revealed) {
+        if (pct > 70 && !revealed) {
           revealed = true;
           ctx2.clearRect(0, 0, W, H);
           if (hint) hint.textContent = '🎉 Surprise revealed! Binny loves you! ❤️';
           burstConfetti(100);
           playChime(1046, 'triangle', 0.5);
         } else if (hint && !revealed) {
-          hint.textContent = `${Math.min(Math.round(pct * 2), 99)}% scratched...`;
+          hint.textContent = `${Math.round(pct)}% scratched...`;
         }
       }
 
@@ -3382,5 +3382,6 @@ It would be to spend every second of it looking at you.`;
       setupCrownEasterEgg();
     });
   </script>
+
 </body>
 </html>
